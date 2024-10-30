@@ -7,11 +7,11 @@ const colors = [
     '#FFCCEA',
 ];
 
-function ColorPalette({ colorSelection, cardId }) {
-    const [isDisplay, setIsDisplay] = useState(false);
+function ColorPalette({ colorSelection }) {
+    const [isDisplay, setIsDisplay] = useState(true);
 
     function hundleChangeColor(color) {
-        colorSelection(cardId, color);
+        colorSelection(color);
         setIsDisplay(false);
     };
 
@@ -22,15 +22,13 @@ function ColorPalette({ colorSelection, cardId }) {
     return (
         <div>
             {isDisplay && (
-                <div>
+                <div className="palette-container">
                     <button onClick={() => closePalette()}>X</button>
-                    <div >
                         {colors.map((color, index) => (
                             <button key={index} onClick={() => hundleChangeColor(color)}>
                                 <div className="color" style={{ backgroundColor: color }}></div>
                             </button>
                         ))}
-                    </div>
                 </div>)}
         </div>
     );

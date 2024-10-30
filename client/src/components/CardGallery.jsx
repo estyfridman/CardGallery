@@ -2,38 +2,33 @@ import { useState, useEffect } from 'react';
 import Card from './Card';
 import { getAllCards, createCard, deleteCard, patchCardField } from '../Services/cardService';
 
-
-const localcards = [
-    { id: '1', text: "Add text to the first card", color: "#BFECFF" },
-    { id: '2', text: "Add text to the second card", color: "#CDC1FF" },
-    { id: '3', text: "Add text to the third card", color: "#FFF6E3" },
-    { id: '4', text: "Add text to the fourth card", color: "#FFCCEA" },
-    { id: '5', text: "Add text to the fiftt card", color: "#D76C82" }
-];
+// const localcards = [
+//     { id: '1', text: "Add text to the first card", color: "#BFECFF" },
+//     { id: '2', text: "Add text to the second card", color: "#CDC1FF" },
+//     { id: '3', text: "Add text to the third card", color: "#FFF6E3" },
+//     { id: '4', text: "Add text to the fourth card", color: "#FFCCEA" },
+//     { id: '5', text: "Add text to the fiftt card", color: "#D76C82" }
+// ];
 
 function CardGallery() {
-    const [cards, setCards] = useState(localcards);
+    const [cards, setCards] = useState([]);
 
     useEffect(() => {
-        async function fetchData() {
-            try {
-                const data = await getAllCards();
-                setCards(data);
-                console.log('Data fetched successfully:', data);
-            } catch (err) {
-                console.log('Error fetching data:', err);
-            }
-        };
-        fetchData();
+        renderData();
     }, []);
 
+    async function renderData(){
+        try { setCards(await getAllCards());
+        } catch (err) {
+            console.log('Error fetching data:', err);
+        }
+    }
     
     async function handleAddCard(){
         try {
-            const cardToAdd = {color: 'FFF6E3', text: 'Add Text'}
-            const newCard = await createCard(cardToAdd );
-            setCards([...cards, newCard]);
-            console.log('Card added successfully:', newCard);
+            const cardToAdd = {color: '#CDC1FF', text: 'Add Text'}
+            await createCard(cardToAdd );
+            renderData()
         } catch (err) {
             console.log('Error adding card:', err);
         }
@@ -42,8 +37,7 @@ function CardGallery() {
     async function handleDeleteCard(cardId){
         try {
             await deleteCard(cardId);
-            const deletedCards = cards.filter(card => card.id!== cardId);
-            console.log('Card deleted successfully:', deletedCards);
+            await renderData();
         } catch (err) {
             console.log('Error deleting card:', err);
         }
@@ -63,8 +57,8 @@ function CardGallery() {
     };
     
     return (
-      <div>
-      <button onClick={handleAddCard} className='add-card-button'> + Add Card </button>
+      <div className='gallery-page'>
+        <button onClick={handleAddCard} className='add-card-button'> + Add Card </button>
 
         {cards.map(card => {
           return (

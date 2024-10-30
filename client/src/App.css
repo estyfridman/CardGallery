@@ -18,15 +18,18 @@
  margin-left: 10%;
 } 
 
+.gallery-page {
+    display: flex;
+    flex-direction: column;
+
+}
+
 .cards-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(25%, 1fr));
-    gap: 1rem;
+    display:inline-block;
+
 }
 
 .card {
-    width: 30%;
-    height: 30%;
     margin: 8px;
     padding: 5%;
     border-radius: 20px;
@@ -71,4 +74,11 @@ button {
     border-radius: 50%;
     width: 10px;
     height: 10px;
+}
+
+.palette-container{
+    background-color: #bfd0ee;
+    border-radius: 10px;
+    padding: 5px;
+    margin-top: 10px;
 }

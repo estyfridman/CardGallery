@@ -37,10 +37,11 @@ function updateDB(array, id, update){
 };
 
 app.post('/cards', (req, res) => {
-    const newCard = { ...Card, ...req.body, 
+    console.log(req.body);
+    const newCard = { 
         id: generateUniqqueID(),
-        color: '#FFCCEA',
-        text: 'Add text',
+        color: req.body.color,
+        text: req.body.text,
     };
     cards.push(newCard);
     res.json(newCard);
