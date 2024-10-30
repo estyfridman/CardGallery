@@ -1,26 +1,13 @@
 import express, { json } from 'express';
 import cors from 'cors';
-// import Card from './dump.js';
+import cards from './dump.js';
+import { generateUniqqueID } from './serverUtils.js';
 
 const app = express();
 const port = 8080;
 
 app.use(cors());
 app.use(json());
-
-const Card = {
-    id: 0,
-    text: '',
-    color: ''
-};
-  
-let cards = [
-    { id: 1, text: "Add text to the first card", color: "#BFECFF" },
-    { id: 2, text: "Add text to the second card", color: "#CDC1FF" },
-    { id: 3, text: "Add text to the third card", color: "#FFF6E3" },
-    { id: 4, text: "Add text to the fourth card", color: "#FFCCEA" },
-    { id: 5, text: "Add text to the fiftt card", color: "#D76C82" }
-];
 
 //testing
 app.get('/', (req, res) => {
@@ -51,7 +38,7 @@ function updateDB(array, id, update){
 
 app.post('/cards', (req, res) => {
     const newCard = { ...Card, ...req.body, 
-        id: cards.length + 1,
+        id: generateUniqqueID(),
         color: '#FFCCEA',
         text: 'Add text',
     };
@@ -85,7 +72,7 @@ app.patch('/cards/:id', (req, res) => {
 });
 
 app.delete('/cards/:id', (req, res) => {
-    const id = parseInt(req.params.id);
+    const id = (req.params.id);
     const index = cards.findIndex(card => card.id === id);
     if (index !== -1) {
         cards.splice(index, 1);
@@ -98,4 +85,5 @@ app.delete('/cards/:id', (req, res) => {
 
 app.listen(port, () => {
     console.log(`Server listening on port ${port}`);
+    console.log(cards);
 });

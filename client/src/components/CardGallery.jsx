@@ -2,8 +2,17 @@ import { useState, useEffect } from 'react';
 import Card from './Card';
 import { getAllCards, createCard, deleteCard, patchCardField } from '../Services/cardService';
 
+
+const localcards = [
+    { id: '1', text: "Add text to the first card", color: "#BFECFF" },
+    { id: '2', text: "Add text to the second card", color: "#CDC1FF" },
+    { id: '3', text: "Add text to the third card", color: "#FFF6E3" },
+    { id: '4', text: "Add text to the fourth card", color: "#FFCCEA" },
+    { id: '5', text: "Add text to the fiftt card", color: "#D76C82" }
+];
+
 function CardGallery() {
-    const [cards, setCards] = useState([]);
+    const [cards, setCards] = useState(localcards);
 
     useEffect(() => {
         async function fetchData() {
@@ -55,11 +64,11 @@ function CardGallery() {
     
     return (
       <div>
-      <button onClick={handleAddCard} > + Add Card </button>
+      <button onClick={handleAddCard} className='add-card-button'> + Add Card </button>
 
         {cards.map(card => {
           return (
-                <div>
+                <div className='cards-container' key={card.id} >
                     <Card key={card.id} cardObject={card} deleteCard={handleDeleteCard} changeField={updateCardField}/>
                 </div>
           )

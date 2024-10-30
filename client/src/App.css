@@ -1,8 +1,33 @@
 
+* {
+    box-sizing: border-box;
+}
+
+.App-header {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    padding: 20px;
+    background-color: #4A628A;
+    font-size: large;
+    font-weight: 600;
+}
+
+.add-card-button {
+ margin-top: 10%;
+ margin-left: 10%;
+} 
+
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25%, 1fr));
+    gap: 1rem;
+}
+
 .card {
     width: 30%;
     height: 30%;
-    margin: 10%;
+    margin: 8px;
     padding: 5%;
     border-radius: 20px;
     box-shadow: 3px 3px 3px 2px rgb(0 0 0 / 10%);
@@ -13,14 +38,13 @@ input {
     background: none;
 }
 
-
 img {
     width: 20px;
     height: 20px;
 }
 
 button {
-    
+    cursor: pointer;
     border: none;
     background: none;
 }
@@ -36,7 +60,7 @@ button {
     display: flex;
     background-color: #a4e9fb;
     border-radius: 20px;
-
+    padding: 5%;
 }
 
 .hideColorSchema {

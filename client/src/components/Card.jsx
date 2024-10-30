@@ -4,14 +4,14 @@ import ColorPalette from './ColorPalette';
 function Card({cardObject, deleteCard, changeField}){
     const [localCardColor, setLocalCardColor] = useState('');
     const [localCardText, setLocalCardText] = useState('');
-    const [colorSchemaStyle, setColorSchemaStyle] = useState('hideColorSchema');
+    const [colorSchemaStyle, setColorSchemaStyle] = useState('displayColorSchema');
 
     function changeDisplayColorSchema(){
         (colorSchemaStyle === 'hideColorSchema' ? setColorSchemaStyle('displayColorSchema') : setColorSchemaStyle('hideColorSchema'));
     };
 
-    function colorSelection(newColor){
-        setLocalCardColor(newColor);
+    function colorSelection(){
+        setLocalCardColor(localCardColor);
     };
 
     return (
@@ -27,7 +27,7 @@ function Card({cardObject, deleteCard, changeField}){
                 <button onClick={()=>changeField(cardObject.id, {text: localCardText})}><img src="/icons/save-svgrepo-com.svg" alt="save"/>save text</button>
             </div>
             
-            <ColorPalette colorSelection={colorSelection} cardId={cardObject.id}/>
+            <ColorPalette colorSelection={colorSelection} cardId={cardObject.id} className={colorSchemaStyle}/>
         </div>
     )
 }
