@@ -9,15 +9,6 @@ export async function getAllCards(){
     }
 };
 
-export async function getCardById(cardId){
-    try {
-        const response = await http.get(`/cards/${cardId}`);
-        return response.data;
-    } catch (error) {
-        console.log(`Failed to fetch card with id: ${cardId}`, error);
-    }
-};
-
 export async function createCard(cardData){
     try {
         const response = await http.post('/cards', cardData);

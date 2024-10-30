@@ -18,26 +18,7 @@ app.get('/cards', (req, res) => {
     res.json(cards);
 });
 
-app.get('/cards/:id', (req, res) => {
-    const id = req.params.id;
-    const card = cards.find(card => card.id === id);
-    res.json(cards);
-});
-
-function updateDB(array, id, update){
-    return array.map(card => {
-        if(card.id === id) {
-            return {
-                ...card,
-                ...update 
-            };
-        }
-        return card;
-    })
-};
-
 app.post('/cards', (req, res) => {
-    console.log(req.body);
     const newCard = { 
         id: generateUniqqueID(),
         color: req.body.color,
@@ -48,7 +29,7 @@ app.post('/cards', (req, res) => {
 });
 
 app.put('/cards/:id', (req, res) => {
-    const id = parseInt(req.params.id);
+    const id = req.params.id;
     const cardIndex = cards.findIndex(card => card.id === id);
     if (cardIndex !== -1) {
       cards[cardIndex] = { ...cards[cardIndex], ...req.body };
@@ -59,16 +40,10 @@ app.put('/cards/:id', (req, res) => {
 });
 
 app.patch('/cards/:id', (req, res) => {
-    const id = parseInt(req.params.id);
-    let updatedCard = cards.find(c => c.id === id);
-    if (!updatedCard) {
-      return res.status(404).send('Card id not found');
-    }
-    updatedCard = {
-       ...updatedCard,
-       ...req.body
-    };
-    cards = updateDB(cards, id, updatedCard);
+    const cardIndex = cards.findIndex((c) => c.id === req.params.id);
+    if (cardIndex === -1) return res.status(404).send('Card not found');
+    const updatedCard = { ...cards[cardIndex], ...req.body };
+    cards[cardIndex] = updatedCard;
     res.json(updatedCard);
 });
 
@@ -77,7 +52,6 @@ app.delete('/cards/:id', (req, res) => {
     const index = cards.findIndex(card => card.id === id);
     if (index !== -1) {
         cards.splice(index, 1);
-        console.log(cards);
         res.status(204).send();
     } else {
         res.status(404).send('Card not found');
@@ -86,5 +60,4 @@ app.delete('/cards/:id', (req, res) => {
 
 app.listen(port, () => {
     console.log(`Server listening on port ${port}`);
-    console.log(cards);
 });
