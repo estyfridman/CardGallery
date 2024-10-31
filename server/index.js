@@ -25,7 +25,7 @@ app.post('/cards', (req, res) => {
         text: req.body.text,
     };
     cards.push(newCard);
-    res.json(newCard);
+    res.json(cards);
 });
 
 app.put('/cards/:id', (req, res) => {
@@ -33,7 +33,7 @@ app.put('/cards/:id', (req, res) => {
     const cardIndex = cards.findIndex(card => card.id === id);
     if (cardIndex !== -1) {
       cards[cardIndex] = { ...cards[cardIndex], ...req.body };
-      res.json(cards[cardIndex]);
+      res.json(cards);
     } else {
       res.status(404).send('Card not found');
     }
@@ -44,7 +44,7 @@ app.patch('/cards/:id', (req, res) => {
     if (cardIndex === -1) return res.status(404).send('Card not found');
     const updatedCard = { ...cards[cardIndex], ...req.body };
     cards[cardIndex] = updatedCard;
-    res.json(updatedCard);
+    res.json(cards);
 });
 
 app.delete('/cards/:id', (req, res) => {
@@ -52,7 +52,7 @@ app.delete('/cards/:id', (req, res) => {
     const index = cards.findIndex(card => card.id === id);
     if (index !== -1) {
         cards.splice(index, 1);
-        res.status(204).send();
+        res.json(cards);
     } else {
         res.status(404).send('Card not found');
     }
