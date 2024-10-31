@@ -3,7 +3,7 @@ import ColorPalette from './ColorPalette';
 
 function Card({cardObject, deleteCard, changeField}){
     const [localCardText, setLocalCardText] = useState('');
-    const [isPaletteDisplay, setIsPaletteDisplay] = useState(false);
+    const [isPaletteDisplay, setIsPaletteDisplay] = useState(true);
 
     function changeDisplayColorSchema(){
         setIsPaletteDisplay(!isPaletteDisplay);
