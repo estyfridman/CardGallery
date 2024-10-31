@@ -14,8 +14,8 @@ You will need node and npm installed globally on your machine.
 
 Installation:
 
-npm install
 ```bash
+npm install
 ```
 
 ## running
@@ -32,7 +32,7 @@ npm run nodemon
 ```
 
 3. finally, to Visit App:
-
+```bash
 localhost:3000/
-
+```
 
