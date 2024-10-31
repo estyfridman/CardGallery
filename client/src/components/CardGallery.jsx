@@ -62,13 +62,14 @@ function CardGallery() {
             <p>Error fetching cards: {error.message}</p>
         ) : (
             <>
-            {cards?.map(card => {
-                return (
-                    <div className='cards-container' key={card.id} >
-                        <Card key={card.id} cardObject={card} deleteCard={handleDeleteCard} changeField={updateCardField}/>
-                    </div>
-                )
-            })}
+            {cards && cards.length > 0 &&
+                cards?.map(card => {
+                    return (
+                        <div className='cards-container' key={card.id} >
+                            <Card key={card.id} cardObject={card} deleteCard={handleDeleteCard} changeField={updateCardField}/>
+                        </div>
+                    )
+                })}
             <button onClick={handleAddCard} className='add-card-button'> + Add Card </button>
             </>        
         )}

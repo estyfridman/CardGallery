@@ -1,5 +1,6 @@
 import './App.css';
 import CardGallery from './components/CardGallery';
+import SearchBar from './components/SearchBar';
 
 function App() {
 
@@ -7,6 +8,7 @@ function App() {
     <div className="App">
       <header className="App-header">Card App</header>
       <div className='container'>
+        <SearchBar/>
         <CardGallery/>
       </div>
     </div>
