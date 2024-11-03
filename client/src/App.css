@@ -21,6 +21,12 @@
 .gallery-page {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.gallery-page h2 {
+    margin-left: 20px;
 
 }
 
@@ -84,5 +90,20 @@ button {
 }
 
 .search {
-    margin: 10px !important;
+    margin: 20px !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;    
+    background-color: #7f9dd0;
+    border-radius: 20px;
+}
+
+.search-button svg{
+    width: 40PX;
+    height: 40px;
+}
+
+.clear {
+    font-size: large;
+    font-weight: 600;
 }
